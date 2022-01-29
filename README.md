@@ -1,5 +1,6 @@
 #ITT-310
 #Code for ITT-310 Class Milestone Project
+#These top three lines are not part of the actual code and are only on Github
 
 // This is a console-based calculator using C code.
 // The program will expand but currently only includes two operations. 
