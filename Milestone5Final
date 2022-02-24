@@ -1,0 +1,167 @@
+// This is a console-based calculator using C code.
+// The program includes four operations and an extra to display information to the programmer 
+// The user can choose to add, subtract, multiply or divide. 
+// There is also a feature that sees when an unavailable operation is chosen, and resets the program. 
+#include<stdio.h>
+#include <stdlib.h>
+#pragma warning(disable : 4996) //Disabling a warning on a safe function
+
+#define OPERATION "Enter the calculator operation you want to do:" //Asks the user to enter an operation
+
+// Function called 
+void addition(); //Calls the addition function
+void subtraction(); //Calls the subtraction fucntion
+void multiplication(); //Calls the multiplication function
+void division(); //Calls the division function
+void calculator_operations(); //Calls the calculator operations function
+void extra_info(); //Calls the extra info - printed line
+void trialNumber(); //Calls the trialNumber function when _ is entered
+
+
+union about2 { //Union to show the month day and year
+    int month; //Creates integer month
+    int day; //Creates integer day
+    int year; //Creates integer year
+}; //All of the above int are stored in the same memory location 
+
+/*Main Program*/
+int main()
+{
+    int V = 1; //Allows the program to run if there is an operation chosen
+    char Calc_operation; //Defines variable so that operations can be chosen
+
+    struct about { //Structure to display information about the program when launched
+        char info[100]; //creates character to show information
+        int iteration; //shows the release version when launched
+        char programmer[50]; //shows who the programmer is 
+    };
+    struct about program3 = { "This is a calculator program\nIteration:", 4, "\nby Luke Shough" }; //defines what will show when the structure is called
+    printf("About : %s %d %s \n", program3.info, program3.iteration, program3.programmer); //calling the structure
+
+    union about2 use; //Union to display the release date for the current version
+    use.month = 2; //Month 2
+    use.day = 13; //Day 13
+    use.year = 2022; //Year 2022
+    printf("\nRelease:\nMonth: 2", use.month); //Prints the month using the union
+    printf("\nDay: 27", use.day); //Prints the day using the union
+    printf("\nYear: 2022\n", use.year); //Prints the year using the union
+
+    // Use the function 
+    calculator_operations(); //use of modular code using user function
+    extra_info(); //Use of second modular code since the original release already included line above
+
+
+    while (V) //While loop if there is an operation chosen
+    {
+        printf("\n"); //\n just makes a new line in the console output
+        printf("%s : ", OPERATION); //Asks the user to enter a calculator operation
+        Calc_operation = getche();
+        switch (Calc_operation)
+        {
+        case '+': addition(); //When + is chosen, the program jumps to use the rules to add numbers below.
+            break;
+
+        case '-': subtraction(); //When - is chosen, the program jumps to use the rules to subtract numbers below. 
+            break;
+
+        case '*': multiplication(); //When * is chosen, the program jumps to use the multiplication rules.
+            break;
+        case '/': division(); //When / us chosen, the program uses division rules
+            break;
+        case '_': trialNumber(); //When _ is chosen, the program uses trial number function for IO
+            break;
+
+        default: system("cls"); //If any other key besides - or + is chosen, this variable is called
+            printf("\nERROR: You have entered an unavailable operator\n"); //Tells the user they entered an unavailable operation
+            printf("\nPlease Enter either +, -, *, or / \n"); //Asks the user to enter an available operation
+            calculator_operations(); //Displays the operations available to use
+        }
+    }
+    return 0;
+}
+
+/*Defintions and preprocessor use*/
+
+void calculator_operations() /*Defines the variable and tells the user what the program does.*/
+{
+    printf("\nThis is a simple console-based calculator program \n"); //Print 'This is a calculator program' to tell the user
+    printf("This final release includes four operations: \n\n"); //Gives detail to the user
+    printf("Use + symbol to Add \n"); //Tells the user to use + to Add numbers
+    printf("Use - symbol to Subtract \n"); //Tells the user to use - to Subtract numbers
+    printf("Use * symbol to Multiply \n"); //Tells the user to use * to Multiply
+    printf("Use / symbol to Divide \n"); //Tells the user to use / to Divide
+
+}
+
+void extra_info() /*Defines what happens when extra_info is called*/
+{
+    printf("\nBEFORE YOU BEGIN, PLEASE ENTER '_'\nThen enter a number specifying how many times you have used the program!\n\n"); //Prints the line asking the user to specify usage number
+}
+
+void addition() /*Defines what happens when + is chosen by the user*/
+{
+    int z, x, y = 0; //Makes three local variables to add later on
+    printf("\nPlease enter first number  : "); //Asks the user to enter a number
+    scanf_s("%d", &z); //The first number entered is now defined as z
+    printf("Please enter second number : "); //Asks the user to enter a number
+    scanf_s("%d", &x); //The second number entered is now defined as x
+    y = z + x; //Y is now equal to the first and second number added together.
+    printf("\n%d + %d = %d\n", z, x, y); //Prints the result of the addition. 
+}
+
+void subtraction() /*Defines what happens when - is chosen by the user*/
+{
+    int a, b, c = 0; //Makes three local variables to subtract later on
+    int* p1, * p2, * p3; //makes pointer variables
+    p1 = &a; //sets p1 equal to location of variable a
+    p2 = &b; //sets p2 equal to location of variable b
+    p3 = &c; //sets p3 equal to location of variable c
+    printf("\nPlease enter first number  : "); //Asks the user to enter a number
+    scanf_s("%d", p1); //The first number entered is now defined as p1 which is equal to a
+    printf("Please enter second number : ");  //Asks the user to enter a number
+    scanf_s("%d", p2); //The second number entered is now defined as p2 which is equal to b
+    c = a - b; //c is now equal to the first and second number added together.
+    printf("\n%d - %d = %d\n", a, b, c);  //Prints the result of the subtraction. 
+}
+
+void multiplication() /*Defines what happens when * is chosen*/
+{
+    int a, b, mul = 0; //creates integer variables to be used for multiplication
+    printf("\nPlease enter first number   : "); //Asks the user to enter first number
+    scanf_s("%d", &a); //Scans for first number
+    printf("Please enter second number: "); //Asls the user to enter second number
+    scanf_s("%d", &b); //Scans for second number
+    mul = a * b; //Multiplies results togeher
+    printf("\nThe multiplied result is = %d\n", mul); //Displays the multiplied numbers to the user
+}
+
+void division() /*Defines what happens when / is chosen*/
+{
+    int n, m, q = 0; //Creates integer variables when / is chosen
+    printf("\nPlease enter first number  : "); //Asks the user to enter the first number
+    scanf_s("%d", &n); //Scans for the first number
+    printf("Please enter second number : "); //Asks the user to enter the second number
+    scanf_s("%d", &m); //Scans for the second number
+    q = n / m; //Takes the two numbers and divides the first one by the second one and makes it equal to variable q
+    printf("\nThe Divided result is = %d\n", q); //Displays the divided result
+}
+
+void trialNumber() /*Defines what happens when _ is chosen*/
+{
+    int num; //Creates integer num
+    FILE* fptr; //makes a pointer for the file
+    fptr = fopen("programinfo.txt", "w"); //W writes a file called 'programinfo'
+
+    if (fptr == NULL) //If the file is empty
+    {
+        printf("Error"); //Return an error message
+        exit(1); // exit the function
+    }
+    printf("Enter trial number: "); //Print "Enter trial number"
+    scanf_s("%d", &num); //Scan for input
+
+    fprintf(fptr, "%d", num); //Print the input number to the file 'programinfo'
+    fclose(fptr); //close the file in the program
+
+    return 0; //close the function
+}
